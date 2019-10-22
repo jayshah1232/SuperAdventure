@@ -4,3 +4,8 @@ C:\Users\User\source\repos\SuperAdventure\Engine\obj\Debug\Engine.csprojAssembly
 C:\Users\User\source\repos\SuperAdventure\Engine\obj\Debug\Engine.csproj.CoreCompileInputs.cache
 C:\Users\User\source\repos\SuperAdventure\Engine\obj\Debug\Engine.dll
 C:\Users\User\source\repos\SuperAdventure\Engine\obj\Debug\Engine.pdb
+D:\Documents\GitHub\SuperAdventure\Engine\bin\Debug\Engine.dll
+D:\Documents\GitHub\SuperAdventure\Engine\bin\Debug\Engine.pdb
+D:\Documents\GitHub\SuperAdventure\Engine\obj\Debug\Engine.dll
+D:\Documents\GitHub\SuperAdventure\Engine\obj\Debug\Engine.pdb
+D:\Documents\GitHub\SuperAdventure\Engine\obj\Debug\Engine.csprojAssemblyReference.cache
