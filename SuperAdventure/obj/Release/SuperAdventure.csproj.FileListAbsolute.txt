@@ -1,0 +1,12 @@
+D:\Documents\GitHub\SuperAdventure\SuperAdventure\bin\Release\SuperAdventure.exe.config
+D:\Documents\GitHub\SuperAdventure\SuperAdventure\bin\Release\SuperAdventure.exe
+D:\Documents\GitHub\SuperAdventure\SuperAdventure\bin\Release\SuperAdventure.pdb
+D:\Documents\GitHub\SuperAdventure\SuperAdventure\bin\Release\Engine.dll
+D:\Documents\GitHub\SuperAdventure\SuperAdventure\bin\Release\Engine.pdb
+D:\Documents\GitHub\SuperAdventure\SuperAdventure\obj\Release\SuperAdventure.csprojAssemblyReference.cache
+D:\Documents\GitHub\SuperAdventure\SuperAdventure\obj\Release\SuperAdventure.Properties.Resources.resources
+D:\Documents\GitHub\SuperAdventure\SuperAdventure\obj\Release\SuperAdventure.SuperAdventure.resources
+D:\Documents\GitHub\SuperAdventure\SuperAdventure\obj\Release\SuperAdventure.csproj.GenerateResource.cache
+D:\Documents\GitHub\SuperAdventure\SuperAdventure\obj\Release\SuperAdventure.csproj.CopyComplete
+D:\Documents\GitHub\SuperAdventure\SuperAdventure\obj\Release\SuperAdventure.exe
+D:\Documents\GitHub\SuperAdventure\SuperAdventure\obj\Release\SuperAdventure.pdb
