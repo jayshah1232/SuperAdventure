@@ -57,6 +57,7 @@ namespace SuperAdventure
             if (!player.hasRequiredItemToEnterThisLocation(newLocation))
             {
                 rtbMessages.Text += "You must have a " + newLocation.m_itemRequiredToEnter.m_name + " to enter this location." + Environment.NewLine;
+                scrollToBottomOfMessages();
                 return;
             }
 
@@ -72,6 +73,7 @@ namespace SuperAdventure
             // Display current location name and description
             rtbLocation.Text = newLocation.m_name + Environment.NewLine;
             rtbLocation.Text += newLocation.m_description + Environment.NewLine;
+            scrollToBottomOfMessages();
 
             // Completely heal the player
             player.m_currentHitPoints = player.m_maximumHitPoints;
@@ -101,6 +103,7 @@ namespace SuperAdventure
                             // Display message
                             rtbMessages.Text += Environment.NewLine;
                             rtbMessages.Text += "You complete the '" + newLocation.m_questAvailableHere.m_name + "' quest." + Environment.NewLine;
+                            scrollToBottomOfMessages();
 
                             // Remove quest items from inventory
                             player.RemoveQuestCompletionItems(newLocation.m_questAvailableHere);
@@ -111,6 +114,7 @@ namespace SuperAdventure
                             rtbMessages.Text += newLocation.m_questAvailableHere.m_rewardGold.ToString() + " gold" + Environment.NewLine;
                             rtbMessages.Text += newLocation.m_questAvailableHere.m_rewardItem.m_name + Environment.NewLine;
                             rtbMessages.Text += Environment.NewLine;
+                            scrollToBottomOfMessages();
 
                             player.m_experiencePoints += newLocation.m_questAvailableHere.m_rewardExperiencePoints;
                             player.m_gold += newLocation.m_questAvailableHere.m_rewardGold;
@@ -131,18 +135,22 @@ namespace SuperAdventure
                     rtbMessages.Text += "You receive the " + newLocation.m_questAvailableHere.m_name + " quest." + Environment.NewLine;
                     rtbMessages.Text += newLocation.m_questAvailableHere.m_description + Environment.NewLine;
                     rtbMessages.Text += "To complete it, return with:" + Environment.NewLine;
+                    scrollToBottomOfMessages();
                     foreach (QuestCompletionItem qci in newLocation.m_questAvailableHere.QuestCompletionItems)
                     {
                         if (qci.m_quantity == 1)
                         {
                             rtbMessages.Text += qci.m_quantity.ToString() + " " + qci.m_details.m_name + Environment.NewLine;
+                            scrollToBottomOfMessages();
                         }
                         else
                         {
                             rtbMessages.Text += qci.m_quantity.ToString() + " " + qci.m_details.m_namePlural + Environment.NewLine;
+                            scrollToBottomOfMessages();
                         }
                     }
                     rtbMessages.Text += Environment.NewLine;
+                    scrollToBottomOfMessages();
 
                     // Add the quest to the player's quest list
                     player.Quests.Add(new PlayerQuest(newLocation.m_questAvailableHere));
@@ -153,6 +161,7 @@ namespace SuperAdventure
             if (newLocation.m_monsterLivingHere != null)
             {
                 rtbMessages.Text += "You see a " + newLocation.m_monsterLivingHere.m_name + Environment.NewLine;
+                scrollToBottomOfMessages();
 
                 // Make a new monster, using the values from the standard monster in the World.m_monster list
                 Monster standardMonster = World.monsterByID(newLocation.m_monsterLivingHere.m_ID);
@@ -305,6 +314,7 @@ namespace SuperAdventure
 
             // Display message
             rtbMessages.Text += "You hit the " + currentMonster.m_name + " for " + damageToMonster.ToString() + " points." + Environment.NewLine;
+            scrollToBottomOfMessages();
 
             //Check if the monster is dead
             if(currentMonster.m_currentHitPoints <= 0)
@@ -312,10 +322,12 @@ namespace SuperAdventure
                 //Monster is dead
                 rtbMessages.Text += Environment.NewLine;
                 rtbMessages.Text += "You defeated the " + currentMonster.m_name + Environment.NewLine;
+                scrollToBottomOfMessages();
 
                 //Give player experience points for killing the monster
                 player.m_experiencePoints += currentMonster.m_rewardExperiencePoints;
                 rtbMessages.Text += "You receive " + currentMonster.m_rewardExperiencePoints.ToString() + " experience points" + Environment.NewLine;
+                scrollToBottomOfMessages();
 
                 //Give player gold for killing the monster
                 List<InventoryItem> lootedItems = new List<InventoryItem>();
@@ -349,10 +361,12 @@ namespace SuperAdventure
                     if(inventoryItem.m_quantity == 1)
                     {
                         rtbMessages.Text += "You loot " + inventoryItem.m_quantity.ToString() + " " + inventoryItem.m_details.m_name + Environment.NewLine;
+                        scrollToBottomOfMessages();
                     }
                     else
                     {
                         rtbMessages.Text += "You loot " + inventoryItem.m_quantity.ToString() + " " + inventoryItem.m_details.m_namePlural + Environment.NewLine;
+                        scrollToBottomOfMessages();
                     }
                 }
 
@@ -368,6 +382,7 @@ namespace SuperAdventure
 
                 //Add a blank line to the messages box, just for appearance
                 rtbMessages.Text += Environment.NewLine;
+                scrollToBottomOfMessages();
 
                 //Move player to current location (to heal player and create a new monster to fight)
                 MoveTo(player.CurrentLocation);
@@ -381,6 +396,7 @@ namespace SuperAdventure
 
                 //Display message
                 rtbMessages.Text += "The " + currentMonster.m_name + " did " + damageToPlayer.ToString() + " points of damage." + Environment.NewLine;
+                scrollToBottomOfMessages();
 
                 //Subtract damage from player
                 player.m_currentHitPoints -= damageToPlayer;
@@ -392,6 +408,7 @@ namespace SuperAdventure
                 {
                     //Display message
                     rtbMessages.Text += "The " + currentMonster.m_name + " killed you." + Environment.NewLine;
+                    scrollToBottomOfMessages();
 
                     //Move player to home
                     MoveTo(World.locationByID(World.LOCATION_ID_HOME));
@@ -425,6 +442,7 @@ namespace SuperAdventure
 
             //Display message
             rtbMessages.Text += "You drink a " + potion.m_name + Environment.NewLine;
+            scrollToBottomOfMessages();
 
             //Monster gets their turn to attack
 
@@ -433,6 +451,7 @@ namespace SuperAdventure
 
             //Display message
             rtbMessages.Text += "The " + currentMonster.m_name + " did " + damageToPlayer.ToString() + " points to damage." + Environment.NewLine;
+            scrollToBottomOfMessages();
 
             //Substract damage from player
             player.m_currentHitPoints -= damageToPlayer;
@@ -441,6 +460,7 @@ namespace SuperAdventure
             {
                 //Display message
                 rtbMessages.Text += "The " + currentMonster.m_name + " killed you." + Environment.NewLine;
+                scrollToBottomOfMessages();
 
                 //Move player to "Home"
                 MoveTo(World.locationByID(World.LOCATION_ID_HOME));
@@ -452,19 +472,10 @@ namespace SuperAdventure
             updatePotionListInUI();
         }
 
-        /*private void SuperAdventure_Load(object sender, EventArgs e)
+        private void scrollToBottomOfMessages()
         {
-
+            rtbMessages.SelectionStart = rtbMessages.Text.Length;
+            rtbMessages.ScrollToCaret();
         }
-
-        private void HitPoints_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }*/
     }
 }
