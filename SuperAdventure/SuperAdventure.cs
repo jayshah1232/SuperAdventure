@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 using Engine;
 
@@ -16,19 +17,23 @@ namespace SuperAdventure
     {
         private Player player;
         private Monster currentMonster;
+        private const string PLAYER_DATA_FILE_NAME = "PlayerData.xml";
         public SuperAdventure()
         {
             InitializeComponent();
+            
+            if(File.Exists(PLAYER_DATA_FILE_NAME))
+            {
+                player = Player.CreatePlayerFromXMLString(File.ReadAllText(PLAYER_DATA_FILE_NAME));
+            }
+            else
+            {
+                player = Player.CreateDefaultPlayer();
+            }
 
+            MoveTo(player.CurrentLocation);
 
-            player = new Player(10, 10, 20, 0, 1);
-            MoveTo(World.locationByID(World.LOCATION_ID_HOME));
-            player.Inventory.Add(new InventoryItem(World.itemByID(World.ITEM_ID_RUSTY_SWORD), 1));
-
-            lblHitPoints.Text = player.m_currentHitPoints.ToString();
-            lblGold.Text = player.m_gold.ToString();
-            lblExperience.Text = player.m_experiencePoints.ToString();
-            lblLevel.Text = player.m_level.ToString();
+            updatePlayerStats();
         }
 
         private void btnNorth_Click(object sender, EventArgs e)
@@ -189,6 +194,9 @@ namespace SuperAdventure
                 btnUsePotion.Visible = false;
             }
 
+            //Refresh player's stats
+            updatePlayerStats();
+
             // Refresh player's inventory list
             updateInventoryListInUI();
 
@@ -202,6 +210,13 @@ namespace SuperAdventure
             updatePotionListInUI();
         }
 
+        private void updatePlayerStats()
+        {
+            lblHitPoints.Text = player.m_currentHitPoints.ToString();
+            lblGold.Text = player.m_gold.ToString();
+            lblExperience.Text = player.m_experiencePoints.ToString();
+            lblLevel.Text = player.m_level.ToString();
+        }
         private void updateInventoryListInUI()
         {
             dgvInventory.RowHeadersVisible = false;
@@ -376,6 +391,7 @@ namespace SuperAdventure
                 lblExperience.Text = player.m_experiencePoints.ToString();
                 lblLevel.Text = player.m_level.ToString();
 
+                updatePlayerStats();
                 updateInventoryListInUI();
                 updateWeaponListInUI();
                 updatePotionListInUI();
@@ -476,6 +492,11 @@ namespace SuperAdventure
         {
             rtbMessages.SelectionStart = rtbMessages.Text.Length;
             rtbMessages.ScrollToCaret();
+        }
+
+        private void SuperAdventure_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            File.WriteAllText(PLAYER_DATA_FILE_NAME, player.toXmlString());
         }
     }
 }
